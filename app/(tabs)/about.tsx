@@ -1,11 +1,10 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from 'expo-router';
 
-export default function Index() {
+export default function aboutScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>🤓</Text>
-      <Link href="/about" style={styles.button}>Vai para o Sobre</Link>
+      <Text style={styles.text}>😃👍</Text>
     </View>
   );
       }
@@ -18,11 +17,8 @@ export default function Index() {
         justifyContent: 'center',
       },
       text: {
-        color: '#ff0000',
+        color: '#ffffff',
+        fontSize: 40,
+        fontWeight: 'bold',
       },
-      button: {
-        fontSize: 20,
-        textDecorationLine: 'underline',
-        color: '#8c05fa',
-      }
     });
