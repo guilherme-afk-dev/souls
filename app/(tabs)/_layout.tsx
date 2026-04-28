@@ -11,7 +11,7 @@ export default function TabLayout() {
                     backgroundColor: '#25292e'
                 },
                 headerShadowVisible: false,
-                headerTintColor: '#fff',
+                headerTintColor: '#ffffff',
                 tabBarStyle: {
                     backgroundColor: '#25292e',
                 },
@@ -38,6 +38,15 @@ export default function TabLayout() {
              }}
              />
 
+             <Tabs.Screen
+             name="toDoList"
+             options={{
+                title: 'List',
+                tabBarIcon: ({ color, focused }) => (
+                    <MaterialCommunityIcons name={ focused ? "clipboard-list" : 'clipboard-list-outline'} size={24} color={color} />
+                ),
+             }}
+             />
              
              </Tabs>
     );
