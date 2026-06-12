@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, ImageSource } from "react-native";
+import { ImageSourcePropType, Text, View, StyleSheet, ImageSource } from "react-native";
 import { Image } from 'expo-image';
 import ImageViewer from '@/components/ImageViewer';
 import Button from '@/components/Button';

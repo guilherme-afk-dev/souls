@@ -9,7 +9,7 @@ export default function aboutScreen() {
 
       <Text style={styles.descricao}>
         Este aplicativo foi criado para organizar e listar seus jogos favoritos
-        de forma simples e prática.
+        de forma simples.
       </Text>
 
       <Text style={styles.subtitulo}>Desenvolvedor</Text>
@@ -19,7 +19,7 @@ export default function aboutScreen() {
       <Text style={styles.texto}>React Native</Text>
 
       <Text style={styles.subtitulo}>Versão</Text>
-      <Text style={styles.texto}>1.0.0</Text>
+      <Text style={styles.texto}>1.0.1</Text>
 
     </View>
   );
