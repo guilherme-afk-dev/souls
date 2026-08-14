@@ -1,6 +1,9 @@
 import { Tabs } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+
+
 
 export default function TabLayout() {
     return(
@@ -47,6 +50,16 @@ export default function TabLayout() {
                 ),
              }}
              />
+
+            <Tabs.Screen
+             name="BuscarCEP"
+             options={{
+                title: 'CEP',
+                tabBarIcon: ({ color, focused }) => (
+                <Ionicons name={focused ? 'location' : 'location'} color={color} size={24} />
+                ),
+             }}
+            />
              
              </Tabs>
     );

@@ -1,48 +1,222 @@
 import React from 'react';
-import { View, Text, TextInput, Button, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+    View,
+    Text,
+    TextInput,
+    FlatList,
+    TouchableOpacity,
+    StyleSheet
+} from 'react-native';
+
 import { useTarefas } from '@/hooks/useTarefas';
 
 export default function App() {
-    const { tarefas, novaTarefa, setNovaTarefa, adicionarTarefa, removerTarefa } = useTarefas();
+    const {
+        tarefas,
+        novaTarefa,
+        setNovaTarefa,
+        adicionarTarefa,
+        removerTarefa
+    } = useTarefas();
 
-    return(
+    return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>Lista de Jogos</Text>
 
-            <View style={styles.inputContainer}>
+            {/* Cabeçalho */}
+            <View style={styles.header}>
+                <Text style={styles.titulo}>Saguão de Jogos</Text>
+
+                <Text style={styles.subtitulo}>
+                    Seus jogos...
+                </Text>
+            </View>
+
+            {/* Campo para adicionar jogo */}
+            <View style={styles.inputArea}>
+
                 <TextInput
-                  style={styles.input}
-                  placeholder="Digite o nome de um Jogo..."
-                  placeholderTextColor="gray"
-                  value={novaTarefa}
-                  onChangeText={setNovaTarefa}
-                  />
-            </View>
-            <Button title="Adicionar" onPress={adicionarTarefa} color='#636363'/>
-        
-        <FlatList
-          data={tarefas}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.tarefaContainer}>
-                <Text style={styles.tarefaTexto}>{item.texto}</Text>
-                <TouchableOpacity onPress={() => removerTarefa(item.id)}>
-                    <Text style={styles.remover}>X</Text>
+                    style={styles.input}
+                    placeholder="Digite o nome do jogo"
+                    placeholderTextColor="#666"
+                    value={novaTarefa}
+                    onChangeText={setNovaTarefa}
+                />
+
+                <TouchableOpacity
+                    style={styles.botao}
+                    onPress={adicionarTarefa}
+                    activeOpacity={0.7}
+                >
+                    <Text style={styles.botaoTexto}>
+                        ADICIONAR
+                    </Text>
                 </TouchableOpacity>
+
             </View>
-          )}
-       />
-     </View>
-   );
+
+            {/* Lista */}
+            <FlatList
+                data={tarefas}
+                keyExtractor={(item) => item.id}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.lista}
+                ListEmptyComponent={
+                    <Text style={styles.vazio}>
+                        Nenhum jogo adicionado.
+                    </Text>
+                }
+                renderItem={({ item }) => (
+                    <View style={styles.jogo}>
+
+                        <View style={styles.jogoInfo}>
+                            <Text style={styles.jogoTexto}>
+                                {item.texto}
+                            </Text>
+
+                            <Text style={styles.tipo}>
+                                SOULS / SOULS-LIKE
+                            </Text>
+                        </View>
+
+                        <TouchableOpacity
+                            style={styles.removerBotao}
+                            onPress={() => removerTarefa(item.id)}
+                            activeOpacity={0.7}
+                        >
+                            <Text style={styles.remover}>
+                                ×
+                            </Text>
+                        </TouchableOpacity>
+
+                    </View>
+                )}
+            />
+
+            <Text style={styles.rodape}>
+                Sua coleção de jogos
+            </Text>
+
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20, backgroundColor: '#000000' },
-    titulo: { fontSize: 24, fontWeight: 'bold', textAlign: 'center', marginBottom: 20, color: '#fff'},
-    inputContainer: { flexDirection: 'row', marginBottom: 10},
-    input: { flex: 1, borderWidth: 1, borderColor: '#ffee00', padding: 10, borderRadius: 5, marginRight: 10, color: '#fff'},
-    tarefaContainer: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#838383', padding: 15,
-        marginBottom: 5, borderRadius: 5, shadowColor: 'rgb(126, 0, 126)', shadowOpacity: 0.1, shadowRadius: 3, elevation: 2},
-    tarefaTexto: { fontSize: 16 },
-    remover: { fontSize: 18, color: 'red' },
+
+    container: {
+        flex: 1,
+        backgroundColor: '#090909',
+        paddingHorizontal: 20,
+        paddingTop: 60,
+    },
+
+    header: {
+        marginBottom: 30,
+    },
+
+    titulo: {
+        color: '#f5f5f5',
+        fontSize: 32,
+        fontWeight: '700',
+        marginBottom: 6,
+    },
+
+    subtitulo: {
+        color: '#777',
+        fontSize: 15,
+    },
+
+    inputArea: {
+        width: '100%',
+        marginBottom: 25,
+    },
+
+    input: {
+        height: 52,
+        backgroundColor: '#151515',
+        borderWidth: 1,
+        borderColor: '#333',
+        borderRadius: 8,
+        paddingHorizontal: 16,
+        color: '#fff',
+        fontSize: 15,
+        marginBottom: 12,
+    },
+
+    botao: {
+        height: 50,
+        backgroundColor: '#3d3d3d',
+        borderRadius: 8,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    botaoTexto: {
+        color: '#fff',
+        fontSize: 13,
+        fontWeight: '700',
+        letterSpacing: 1,
+    },
+
+    lista: {
+        paddingBottom: 20,
+    },
+
+    jogo: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        backgroundColor: '#151515',
+        borderWidth: 1,
+        borderColor: '#282828',
+        borderRadius: 10,
+        padding: 17,
+        marginBottom: 10,
+    },
+
+    jogoInfo: {
+        flex: 1,
+    },
+
+    jogoTexto: {
+        color: '#eee',
+        fontSize: 17,
+        fontWeight: '600',
+        marginBottom: 5,
+    },
+
+    tipo: {
+        color: '#666',
+        fontSize: 11,
+        letterSpacing: 1,
+    },
+
+    removerBotao: {
+        width: 34,
+        height: 34,
+        borderRadius: 17,
+        backgroundColor: '#242424',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 12,
+    },
+
+    remover: {
+        color: '#aaa',
+        fontSize: 23,
+        fontWeight: '300',
+    },
+
+    vazio: {
+        color: '#555',
+        textAlign: 'center',
+        marginTop: 30,
+        fontSize: 14,
+    },
+
+    rodape: {
+        color: '#444',
+        textAlign: 'center',
+        fontSize: 12,
+        marginBottom: 15,
+    },
 });
